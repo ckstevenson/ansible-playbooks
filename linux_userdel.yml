@@ -1,0 +1,11 @@
+- hosts:
+  vars_prompt:
+    - name: user
+      prompt: "Which user to delete?"
+      private: no
+  tasks:
+    - name: Removing user {{ user }}
+      user:
+        name: "{{ user }}"
+        state: absent
+        remove: yes

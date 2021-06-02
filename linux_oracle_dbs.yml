@@ -1,0 +1,18 @@
+---
+- hosts:
+  #serial: 1
+  tasks:
+  - name: Finding out number of db instances
+    shell: |
+      . /home/oracle/.bash_profile && /usr/local/in/dbs.sh && /usr/local/in/dbs.sh | wc -l
+    register: dbs
+  - name: Finding out number of db instances on
+    shell: |
+      . /home/oracle/.bash_profile && /usr/local/in/psora.sh && /usr/local/in/psora.sh | wc -l
+    register: psora
+  - name: Debugging output dbs
+    debug:
+      msg: "{{ dbs.stdout_lines }}"
+  - name: Debugging output psora
+    debug:
+      msg: "{{ psora.stdout_lines }}"

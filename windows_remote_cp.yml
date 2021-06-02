@@ -1,0 +1,18 @@
+---
+hosts:
+  vars_prompt:
+    #- name: src_machine
+    #  prompt: "Please enter the remote hostname or IP you wish to copy files from (i.e. source machine)"
+    #  private: no
+    - name: dest_machine
+      prompt: "Please enter the remote hostname or IP you wish to copy files to (i.e. destination machine)"
+      private: no
+    - name: src_loc
+      prompt: "Please enter the remote source of the files you wish to copy"
+      private: no
+    - name: dest_loc
+      prompt: "Please enter the remote destination you wish to copy the files to"
+      private: no
+  tasks:
+    - win_shell: | 
+      Copy-Item –Path "{{ src_loc }}" –Destination '"{{ dest_loc }}"' –ToSession (New-PSSession –ComputerName "{{ dest_machine }}")

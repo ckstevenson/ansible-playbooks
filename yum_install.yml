@@ -1,0 +1,10 @@
+# Install a package with yum
+---
+- hosts:
+  vars:
+    packages: []
+  tasks:
+    - name: Install {{ packages }}
+      yum:
+        name: "{{ item }}"
+      loop: "{{ packages }}"

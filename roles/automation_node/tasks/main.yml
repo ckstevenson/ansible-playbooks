@@ -1,0 +1,19 @@
+# applies updates machine, install packages and copies configs for a CSO automation node
+---
+#    - include_role:
+#        name: common
+#        tasks_from: "{{ ansible_pkg_mgr }}_all"
+- name: Include CentOS tasks
+  include_tasks: centos.yml
+  when: ansible_distribution == 'CentOS'
+- name: Include Debian tasks
+  include_tasks: debian.yml
+  when: ansible_distribution == 'Debian'
+- name: Install krb5 configuration file
+  template:
+    src: "{{ krb5_conf_src }}"
+    dest: "{{ krb5_conf_dest }}"
+    owner: root
+    group: root
+    setype: krb5_conf_t
+    mode: '0644'

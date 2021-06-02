@@ -1,0 +1,29 @@
+# Join Windows workgroup then a domain. Useful if the machine is already in one domain
+# Uage:  ansible-playbook windows_ad_leave_join.yml --extra-vars "domain_admin_user={username}}]" -u .\\{username} -k
+# .\\ forces the user to be local to the machine and not in a domain. Needed if leaving one domain for another per my initial testing.
+---
+- hosts: default
+  gather_facts: no
+  vars:
+    domain_admin_user:
+    domain_ou_path: ""
+  vars_prompt:
+    - name: domain_admin_password
+      prompt: "Enter your username's password"
+  tasks:
+  - name: Ensure the machine is in a workgroup
+    win_domain_membership:
+      workgroup_name: WORKGROUP
+      domain_admin_user: "{{ domain_admin_user }}"
+      domain_admin_password: "{{ domain_admin_password }}"
+      state: workgroup
+  - name: Add a Windows machine to a domain
+    win_domain_membership:
+      dns_domain_name: "{{ domain }}" # set in group_vars/all.yml
+      domain_admin_user: "{{ domain_admin_user }}"
+      domain_admin_password: "{{ domain_admin_password }}"
+      domain_ou_path: "{{ domain_ou_path }}"
+      state: domain
+    register: domain_state
+  - win_reboot:
+    when: domain_state.reboot_required

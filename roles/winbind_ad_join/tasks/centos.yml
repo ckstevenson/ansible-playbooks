@@ -1,0 +1,29 @@
+---
+# roles/common/tasks/main.yml
+# applies updates machine, edits hostname and joins to domain
+- include_role:
+    name: common
+    tasks_from: yum_all.yml
+- name: Install required packages
+  package:
+    name: "{{ item }}"
+  loop:
+    - samba-winbind 
+    - ntp
+- name: Configure authentification services
+  command: 
+    argv:
+      - authconfig 
+      - --enablewinbind 
+      - --enablewinbindoffline 
+      - --enablewinbindauth 
+      - --enablemkhomedir 
+      - --update
+  notify: restart ntpd
+- include_role:
+    name: winbind_ad_join
+    tasks_from: global.yml
+- name: Enable ntpd.service
+  service:
+    name: ntpd
+    enabled: yes

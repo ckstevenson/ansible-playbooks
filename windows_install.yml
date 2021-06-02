@@ -1,0 +1,15 @@
+---
+- hosts: default
+  vars:
+    #filename: "chromesetup.exe"
+    #product_id: '{418DFBFA-4DE8-41C0-A272-727307252DBD}'
+    filename: ''
+    product_id: ''
+  tasks:
+  - name: Install package from SMB share
+    win_package:
+      path: "{{ smb_path }}{{ filename }}"
+      product_id: "{{ product_id }}"
+      user_name: "{{ smb_username }}"
+      password: "{{ smb_pwd }}"
+      arguments: /silent /install

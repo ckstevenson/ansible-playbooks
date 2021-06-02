@@ -1,0 +1,15 @@
+# roles/httpd/tasks/main.yml
+---
+
+- name: Ensure Firewalld is enabled
+  service:
+    name: firewalld
+- name: Add http and https services to firewalld
+  firewalld:
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+  notify: restart firewalld
+  loop:
+    - http
+    - https

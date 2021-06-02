@@ -1,0 +1,6 @@
+---
+- hosts:
+  tasks:
+   - include_role:
+       name: common
+       tasks_from: yum_all.yml

@@ -1,0 +1,7 @@
+---
+# Install packegs and configure base Windows machine for Ranorex
+- hosts: ranorex
+  tasks:
+    - name: Install 
+      include_role:
+       name: ranorex

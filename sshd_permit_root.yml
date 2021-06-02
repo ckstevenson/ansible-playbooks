@@ -1,0 +1,11 @@
+- hosts:
+  tasks:
+    - name: Modifying root ssh access
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: 'PermitRootLogin yes'
+        line: PermitRootLogin no
+    - name: Restart sshd
+      service:
+        name: sshd
+        state: restarted

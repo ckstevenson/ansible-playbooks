@@ -1,0 +1,10 @@
+# Install ssh key to authorized_keys
+---
+- hosts: default
+  vars:
+    key_user: 
+    key_file:
+  tasks:
+  - include_role:
+      name: ssh
+      tasks_from: cp_sshkeys.yml

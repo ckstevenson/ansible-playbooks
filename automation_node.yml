@@ -1,0 +1,11 @@
+---
+- hosts: default
+  vars:
+    key_user:
+    key_file:
+  tasks:
+    - include_role:
+        name: automation_node
+    - include_role:
+        name: ssh
+        tasks_from: cp_sshkeys.yml

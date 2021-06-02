@@ -1,0 +1,10 @@
+# DESCRIPTION
+---
+- hosts:
+  vars:
+  vars_files:
+  vars_prompt:
+  tasks:
+    - include_role:
+        name:
+        tasks_from:

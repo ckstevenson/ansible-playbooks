@@ -1,0 +1,16 @@
+# Provisions Linux instances during the Packer deployment
+---
+- hosts: default
+  vars:
+    key_user: 
+    key_file: 
+  tasks:
+    - include_role:
+        name: ssh
+        tasks_from: cp_sshkeys.yml
+    - include_role:
+        name: common
+        tasks_from: "{{ ansible_pkg_mgr }}_all"
+    - include_role:
+        name: update_pwd
+        tasks_from: "{{ ansible_os_family|lower }}"

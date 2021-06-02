@@ -1,0 +1,14 @@
+# A basic webserver only on systems using yum package manager
+---
+- hosts:
+  become: yes
+  vars:
+    firewalld: no
+  tasks:
+   # web server and config changes
+   - include_role:
+       name: webserver
+   - include_role:
+       name: webserver
+       tasks_from: firewalld
+     when: firewalld == 'yes'

@@ -1,0 +1,20 @@
+---
+- hosts: 
+  tasks:
+    - name: Resize sda to utilize complete disk space
+      shell: /bin/echo -e "d\n2\nn\np\n2\n\n\nw" | sudo fdisk /dev/sda
+      register: resize
+      failed_when: resize.rc > 1
+    - name: Inform the OS of partition table changes
+      shell: partprobe
+    - name: Extend the physcal volume for LVM
+      command: pvresize /dev/sda2
+    - name: Extend the logical volume to consume all remaining space
+      lvol:
+        vg: centos
+        lv: root
+        size: +100%FREE
+    - name: Extend xfs
+      command: xfs_growfs /dev/centos/root
+    - name: Unconditionally reboot the machine
+      reboot:

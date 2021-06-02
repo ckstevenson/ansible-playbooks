@@ -1,0 +1,12 @@
+# Install 1 or more chocolatey packages on destination machines
+---
+- hosts: default
+  tasks:
+    - name: Install chocolatey packages
+      become: yes
+      become_method: runas
+      become_user: Administrator
+      win_chocolatey: 
+        name:
+          - notepadplusplus
+

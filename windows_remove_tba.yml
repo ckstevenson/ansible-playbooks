@@ -1,0 +1,15 @@
+---
+- hosts:
+  tasks:
+    - name: Uninstall TBA products
+      win_package:
+        path: C:\TBA_Workspace\Products\Monitor_agent_17.4.1\uninstall.exe
+        #product_id: "{{item}}"
+        product_id: Monitor_agent_0
+        arugment: /s
+        state: absent
+        #loop:
+          #- 'Monitor_agent_0'
+          #- 'Monitor_0'
+          #- Monitor_17.4.2
+          #- Monitor_agent_17.4.1
