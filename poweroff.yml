@@ -1,4 +1,0 @@
----
-- hosts:
-  tasks:
-   - command: poweroff 

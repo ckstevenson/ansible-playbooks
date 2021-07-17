@@ -1,2 +1,0 @@
-httpd_config_dest: /etc/httpd/conf/httpd.conf
-httpd_config_src: httpd.conf.j2 

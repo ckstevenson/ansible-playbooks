@@ -1,7 +1,0 @@
-# Inlcude the Windows update task
----
-- hosts: default
-  tasks:
-    - include_role: 
-        name: common
-        tasks_from: windows_important.yml

@@ -1,7 +1,0 @@
-# Update Linux OS based on information pulled from Ansible facts
----
-- hosts: default
-  tasks:
-    - include_role:
-        name: common
-        tasks_from: "{{ ansible_pkg_mgr }}_all"

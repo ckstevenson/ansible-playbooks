@@ -1,3 +1,0 @@
-- name: Setting the hostname
-  hostname:
-    name: "{{ hostname }}"
