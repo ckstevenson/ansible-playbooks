@@ -1,4 +1,0 @@
-ntp_conf_src: ntp.conf.j2
-ntp_conf_dest: /etc/ntp.conf
-krb5_conf_src: krb5.conf.j2
-krb5_conf_dest: /etc/krb5.conf

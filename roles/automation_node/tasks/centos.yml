@@ -1,6 +1,0 @@
-- name: Install required packages
-  package:
-    name: "{{ item }}"
-  loop:
-    - pam_krb5 
-    - krb5-workstation
